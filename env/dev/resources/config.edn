@@ -1,1 +1,1 @@
-{}
+{:database-url "datomic:free://localhost:4334/change-measurements"}

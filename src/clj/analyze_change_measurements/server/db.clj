@@ -1,11 +1,24 @@
-(ns analyze-change-measurements.db.core
+(ns analyze-change-measurements.server.db
   (:require [datomic.api :as d]
             [mount.core :refer [defstate]]
+            [clojure.core.async :as a]
+            [clojure.tools.logging :refer [debug info]]
             [analyze-change-measurements.config :refer [env]]))
 
 (defstate conn
   :start (-> env :database-url d/connect)
   :stop (-> conn .release))
+
+(defn start-server>clients-broadcaster []
+ (let [tx-report-mult (-> conn d/tx-report-queue a/mult)]
+  (info "Started process to push server database change events to all connected clients.")
+  (fn connect [client]
+   (a/tap tx-report-mult client)
+   (info "Client connected."))))
+
+(defstate server>
+ :start (start-server>clients-broadcaster)
+ :stop (-> conn d/remove-tx-report-queue))
 
 (defn create-schema []
   (let [schema [{:db/ident              :user/id

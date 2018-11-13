@@ -3,7 +3,8 @@
             [kee-frame.core :as kf]
             [markdown.core :refer [md->html]]
             [reagent.core :as r]
-            [re-frame.core :as rf]))
+            [re-frame.core :as rf]
+            [analyze-change-measurements.client.event-handler :as event-handler]))
 
 ; the navbar components are implemented via baking-soda [1]
 ; library that provides a ClojureScript interface for Reactstrap [2]
@@ -38,15 +39,17 @@
 
 (defn home-page []
   [:div.container
+   [:button {:on-click #(rf/dispatch [::event-handler/send-tx! []])}
+    "Ping the server."]
    (when-let [docs @(rf/subscribe [:docs])]
-     [:div.row>div.col-sm-12
-      [:div {:dangerouslySetInnerHTML
-             {:__html (md->html docs)}}]])])
+    [:div.row>div.col-sm-12
+     [:div {:dangerouslySetInnerHTML
+            {:__html (md->html docs)}}]])])
 
 (defn root-component []
   [:div
    [navbar]
-   [kf/switch-route (fn [route] (get-in route [:data :name]))
+   [kf/switch-route (comp :name :data)
     :home home-page
     :about about-page
     nil [:div ""]]])

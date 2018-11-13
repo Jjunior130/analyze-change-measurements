@@ -42,7 +42,8 @@
                  [ring/ring-core "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
                  [secretary "1.2.3"]
-                 [selmer "1.12.3"]]
+                 [selmer "1.12.3"]
+                 [re-posh "0.3.0"]]
 
   :min-lein-version "2.0.0"
 

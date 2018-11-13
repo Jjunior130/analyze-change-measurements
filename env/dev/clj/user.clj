@@ -21,8 +21,9 @@
   (start))
 
 (comment
- (start)
- (start-fw)
+ (do
+  (start)
+  (start-fw))
  (restart)
  (stop-fw)
  (stop))
