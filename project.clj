@@ -43,9 +43,14 @@
                  [ring/ring-defaults "0.3.2"]
                  [secretary "1.2.3"]
                  [selmer "1.12.3"]
-                 [re-posh "0.3.0"]]
+                 [re-posh "0.3.0"]
+                 [com.datomic/datomic-pro "0.9.5703"]
+                 [org.postgresql/postgresql "9.3-1102-jdbc41"]]
 
   :min-lein-version "2.0.0"
+
+  :repositories {"my.datomic.com" {:url "https://my.datomic.com/repo"
+                                   :creds :gpg}}
 
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
   :test-paths ["test/clj"]

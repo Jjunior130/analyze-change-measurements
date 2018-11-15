@@ -1,1 +1,2 @@
 {:database-url "datomic:free://localhost:4334/change-measurements"}
+ ; "datomic:sql://change-measurements?jdbc:postgresql://ec2-54-204-10-231.compute-1.amazonaws.com:5432/d3i5280re53gfs?user=dqziqfxddjojzq&password=2dab43c9b19569d98c688a62343f9f5a1efe9c73711dfbc946dcf013b964626a&sslmode=require"}
