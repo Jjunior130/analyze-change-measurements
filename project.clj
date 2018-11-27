@@ -45,7 +45,8 @@
                  [selmer "1.12.3"]
                  [re-posh "0.3.0"]
                  [com.datomic/datomic-pro "0.9.5786"]
-                 [org.postgresql/postgresql "9.3-1102-jdbc41"]]
+                 [org.postgresql/postgresql "9.3-1102-jdbc41"]
+                 [me.raynes/fs "1.4.6"]]
 
   :min-lein-version "2.0.0"
 
