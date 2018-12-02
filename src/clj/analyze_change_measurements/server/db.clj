@@ -6,7 +6,7 @@
            [analyze-change-measurements.config :refer [env]]))
 
 (defstate conn
-  :start (-> env :options :database-url d/connect)
+  :start (-> env :transactor-url d/connect)
   :stop (-> conn .release))
 
 (defn start-server>clients-broadcaster []
