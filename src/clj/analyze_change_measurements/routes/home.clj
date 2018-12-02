@@ -5,8 +5,7 @@
             [ring.util.http-response :as response]
             [clojure.tools.logging :refer [debug info]]
             [analyze-change-measurements.server.event-handler :as event-handler]
-            [analyze-change-measurements.server.db :as db]
-            [datomic.api :as d]))
+            [analyze-change-measurements.server.db :as db]))
 
 (defn server<> [client]
  (doto client

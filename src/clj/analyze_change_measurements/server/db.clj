@@ -3,17 +3,11 @@
            [mount.core :refer [defstate]]
            [clojure.core.async :as a]
            [clojure.tools.logging :refer [debug info]]
-           [analyze-change-measurements.config :refer [env]]
-           [analyze-change-measurements.server.transactor :as transactor])
- (:import [java.net InetAddress]))
-
-(defstate datomic-transactor
- :start (transactor/start)
- :stop (transactor/stop datomic-transactor))
+           [analyze-change-measurements.config :refer [env]]))
 
 (defstate conn
- :start (-> env :database-url d/connect)
- :stop (-> conn .release))
+  :start (-> env :database-url d/connect)
+  :stop (-> conn .release))
 
 (defn start-server>clients-broadcaster []
  (let [tx-report-mult (-> conn d/tx-report-queue a/mult)]
@@ -23,8 +17,8 @@
    (info "Client connected."))))
 
 (defstate server>
- :start (start-server>clients-broadcaster)
- :stop (-> conn d/remove-tx-report-queue))
+  :start (start-server>clients-broadcaster)
+  :stop (-> conn d/remove-tx-report-queue))
 
 (defn create-schema []
  (let [schema [{:db/ident              :user/id

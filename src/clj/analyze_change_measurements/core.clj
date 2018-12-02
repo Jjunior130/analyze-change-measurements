@@ -5,8 +5,7 @@
            [analyze-change-measurements.config :refer [env]]
            [clojure.tools.cli :refer [parse-opts]]
            [clojure.tools.logging :as log]
-           [mount.core :as mount]
-           [analyze-change-measurements.server.transactor :as transactor])
+           [mount.core :as mount])
  (:gen-class))
 
 (def cli-options
@@ -32,7 +31,6 @@
                 (when repl-server
                  (nrepl/stop repl-server)))
 
-
 (defn stop-app []
  (doseq [component (:stopped (mount/stop))]
   (log/info component "stopped"))
@@ -47,6 +45,5 @@
  (.addShutdownHook (Runtime/getRuntime) (Thread. stop-app)))
 
 (defn -main [& args]
- (transactor/download-datomic)
- (transactor/configure-properties)
  (start-app args))
+
