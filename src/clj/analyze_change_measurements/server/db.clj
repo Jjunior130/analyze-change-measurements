@@ -5,6 +5,8 @@
            [clojure.tools.logging :refer [debug info]]
            [analyze-change-measurements.config :refer [env]]))
 
+(d/create-database "datomic:mem://change-measurements")
+
 (defstate conn
   :start (-> env :transactor-url d/connect)
   :stop (-> conn .release))

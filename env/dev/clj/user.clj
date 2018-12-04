@@ -36,9 +36,6 @@
  (start-fw))
 
 (comment
- (do
-  (start)
-  (start-fw))
  (restart)
  (stop-fw)
  (stop))
