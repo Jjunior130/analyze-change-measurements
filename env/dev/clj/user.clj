@@ -9,22 +9,21 @@
  (:import [java.lang.management ManagementFactory]))
 
 (defn get-pid []
-  "Gets this process' PID."
-  (let [pid (.getName (ManagementFactory/getRuntimeMXBean))]
-    (first (re-seq #"[0-9]+" pid))))
+ "Gets this process' PID."
+ (let [pid (.getName (ManagementFactory/getRuntimeMXBean))]
+  (first (re-seq #"[0-9]+" pid))))
 
 (defn write-pid-file [pid-file]
-  "Writes this process' PID to a supplied file name."
-  (spit pid-file (get-pid)))
+ "Writes this process' PID to a supplied file name."
+ (spit pid-file (get-pid)))
 
 (alter-var-root #'s/*explain-out* (constantly expound/printer))
 
 (defn start []
-  (mount/start-without #'analyze-change-measurements.core/repl-server
-                       #'analyze-change-measurements.handler/init-app))
+ (mount/start-without #'analyze-change-measurements.core/repl-server
+                      #'analyze-change-measurements.handler/init-app))
 
 (defn stop []
- #_(transactor/stop)
  (mount/stop-except))
 ;;   #'analyze-change-measurements.core/repl-server
 ;;   #'analyze-change-measurements.handler/init-app
@@ -32,8 +31,9 @@
 ;;   #'analyze-change-measurements.server.db/server>))
 
 (defn restart []
-  (stop)
-  (start))
+ (stop)
+ (start)
+ (start-fw))
 
 (comment
  (do
